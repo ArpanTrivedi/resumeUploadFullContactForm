@@ -21,4 +21,19 @@ export class UploadService {
     return this.http.get((this.url + "allApplicant"));
   }
 
+  //get the persons
+  getThePerson(name) {
+    return this.http.get((this.url + "person/" + name));
+  }
+
+  //delete the particular data
+  deleteUserData(id) {
+    return this.http.delete((this.url + "delete/" + id));
+  }
+
+  //update the data
+  updateUserData(post, id) {
+    return this.http.put((this.url + "update/" +id), post);
+  }
+
 }

@@ -6,20 +6,32 @@ import {
   faMapMarkedAlt,
   faEnvelopeOpen
  } from "@fortawesome/free-solid-svg-icons";
+
 import { Router } from '@angular/router';
 import { DataServiceService } from 'src/app/data-service.service';
 
 
-
 @Component({
-  selector: 'app-people',
-  templateUrl: './people.component.html',
-  styleUrls: ['./people.component.css']
+  selector: 'app-find-the-person',
+  templateUrl: './find-the-person.component.html',
+  styleUrls: ['./find-the-person.component.css']
 })
-export class PeopleComponent implements OnInit {
+export class FindThePersonComponent implements OnInit {
 
   array = [];
-
+  name: string = '';
+  
+  submit() {
+    this.service.getUserData().subscribe((data: any) => {
+      console.log(data.data);
+      this.array = data?.data;
+      console.log(this.array);
+    }, (err) => {
+      this.toast.error(err.message,"",{
+        closeButton:true
+      });
+    });
+  }
 
   faEnvelopeOpen = faEnvelopeOpen;
   faMapMarkedAlt = faMapMarkedAlt;
@@ -32,32 +44,16 @@ export class PeopleComponent implements OnInit {
     private dataService: DataServiceService
     ) { }
 
-  seeUser() {
-    this.service.getUserData().subscribe((data: any) => {
-      this.array = data?.data;
-      console.log(this.array);
-    }, (err) => {
-      this.toast.error(err.message,"",{
-        closeButton:true
-      });
-    });
-  }
-
   ngOnInit(): void {
-
-    this.seeUser();
-
   }
 
   onClick(data) {
     console.log(data);
     this.service.deleteUserData(data).subscribe((result) => {
       this.toast.success('success user data deleted');
-      this.seeUser();
+      this.submit();
     }, (err) => {
-      this.toast.error(err.message,"",{
-        closeButton:true
-      });
+      this.toast.error(`Please enter the full name` + err.message);
     });
 
   }

@@ -14,6 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { UpdateProfileComponent } from './component/update-profile/update-profile.component';
+import { FindThePersonComponent } from './component/find-the-person/find-the-person.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HeaderComponent,
     FooterComponent,
     PagenotfoundComponent,
+    UpdateProfileComponent,
+    FindThePersonComponent,
   ],
   imports: [
     BrowserModule,
